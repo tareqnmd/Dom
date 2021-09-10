@@ -1,0 +1,40 @@
+@import './import';
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: $font-family;
+	* {
+		margin: 0;
+		padding: 0;
+	}
+}
+
+h1,
+h2 {
+	text-align: center;
+}
+
+.section-content {
+	box-shadow: 0 0 20px #70707023;
+	border-radius: 8px;
+	padding: 10px;
+	margin: 6px;
+}
+
+.grid {
+	display: grid;
+	grid-template: repeat(12, 1fr) / 1fr 1fr;
+	.add-task {
+		@extend .section-content;
+		grid-column: 1/-1;
+	}
+	.incomplete-task {
+		@extend .section-content;
+	}
+	.completed-task {
+		@extend .section-content;
+	}
+}

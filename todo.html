@@ -64,8 +64,10 @@
 				// });
 			};
 			const bindCompletedTask = (div, completedTask) => {
-				const button = div.querySelector('button');
-				button.onclick = deleteTask;
+				const button1 = div.querySelector('.undo');
+				const button2 = div.querySelector('.delete');
+				button1.onclick = redoTask;
+				button2.onclick = deleteTask;
 				// button.addEventListener('click', () => {
 				// 	completedTask(event);
 				// });
@@ -84,11 +86,25 @@
 			const completedTask = (event) => {
 				const item = event.target.parentNode;
 				item.querySelector('button').remove();
-				const button = document.createElement('button');
-				button.innerText = 'Delete';
-				item.appendChild(button);
+				const button1 = document.createElement('button');
+				const button2 = document.createElement('button');
+				button1.innerText = 'Undo';
+				button1.className = 'undo';
+				button2.innerText = 'Delete';
+				button2.className = 'delete';
+				item.append(button1, button2);
 				completedTasks.appendChild(item);
 				bindCompletedTask(item, completedTasks);
+			};
+			const redoTask = (event) => {
+				const item = event.target.parentNode;
+				item.querySelector('.undo').remove();
+				item.querySelector('.delete').remove();
+				const button = document.createElement('button');
+				button.innerText = 'Complete';
+				item.appendChild(button);
+				incompleteTask.appendChild(item);
+				bindInCompleteTask(item, completedTask);
 			};
 
 			const deleteTask = (event) => {

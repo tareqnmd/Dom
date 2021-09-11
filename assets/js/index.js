@@ -47,11 +47,16 @@ console.log(children2.previousElementSibling);
 // Manipulating
 
 const divElement = document.createElement('div');
+divElement.innerText = 'Section Added by Js'
 divElement.className = 'created'
 divElement.setAttribute('id', 'created');
-divElement.innerText = 'Hello Bois'
 const parent3 = document.querySelector('.todo')
 // parent.appendChild(divElement);
 const children3 = document.querySelector('h2')
 parent3.insertBefore(divElement, children3);
 
+// Event Listeners
+
+header.addEventListener('click', (event) => {
+    console.log(event)
+})

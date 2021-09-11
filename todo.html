@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Todo</title>
+		<style>
+			.task {
+				width: 200px;
+				align-items: center;
+				justify-content: space-between;
+				display: flex;
+				margin: 0;
+				padding: 0;
+				margin-bottom: 5px;
+			}
+			.task * {
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="todo">
+			<div class="add-task">
+				<h3>Add Task</h3>
+				<form action="">
+					<input required type="text" placeholder="Enter new Task" />
+					<button type="submit">Add Task</button>
+				</form>
+			</div>
+			<div class="incomplete-task">
+				<h3>Incomplete Task</h3>
+			</div>
+			<div class="completed-task">
+				<h3>Compatible Task</h3>
+			</div>
+		</div>
+		<script>
+			const form = document.querySelector('.add-task form');
+			const addTaskValue = document.querySelector('.add-task input');
+			const incompleteTask = document.querySelector('.incomplete-task');
+			const completedTasks = document.querySelector('.completed-task');
+
+			const addTask = (task) => {
+				const div = document.createElement('div');
+				const p = document.createElement('p');
+				const button = document.createElement('button');
+				div.className = 'task';
+				p.innerText = task;
+				button.innerText = 'Complete';
+				// button.setAttribute('onClick', 'completedTask(event)');
+				div.append(p, button);
+				incompleteTask.appendChild(div);
+				bindInCompleteTask(div, completedTask);
+			};
+
+			const bindInCompleteTask = (div, completedTask) => {
+				const button = div.querySelector('button');
+				button.onclick = completedTask;
+				// button.addEventListener('click', () => {
+				// 	completedTask(event);
+				// });
+			};
+			const bindCompletedTask = (div, completedTask) => {
+				const button = div.querySelector('button');
+				button.onclick = deleteTask;
+				// button.addEventListener('click', () => {
+				// 	completedTask(event);
+				// });
+			};
+
+			form.addEventListener('submit', (event) => {
+				event.preventDefault();
+				addTask(addTaskValue.value);
+				addTaskValue.value = '';
+			});
+
+			// const completedTask = (event) => {
+			// 	 event.target.closest('.task').remove();
+			// };
+
+			const completedTask = (event) => {
+				const item = event.target.parentNode;
+				item.querySelector('button').remove();
+				const button = document.createElement('button');
+				button.innerText = 'Delete';
+				item.appendChild(button);
+				completedTasks.appendChild(item);
+				bindCompletedTask(item, completedTasks);
+			};
+
+			const deleteTask = (event) => {
+				event.target.parentNode.remove();
+			};
+		</script>
+	</body>
+</html>
